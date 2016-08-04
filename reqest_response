@@ -1,0 +1,12 @@
+Request URL:http://www.emu-land.net/consoles/genesis/roms?act=getfile&id=1
+Request Method:GET
+Status Code:302 Moved Temporarily
+Remote Address:95.169.191.16:80
+Response Headers
+view source
+Cache-Control:private
+Connection:keep-alive
+Content-Type:text/html
+Date:Thu, 04 Aug 2016 19:47:08 GMT
+Expires:Thu, 19 Nov 1981 08:52:00 GMT
+Location:http://dl2.emu-land.net/roms/gen/12-in-1.7z
