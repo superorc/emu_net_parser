@@ -1,5 +1,5 @@
-
-#http://www.emu-land.net/consoles/genesis/roms?act=getfile&id=1
+#!/usr/bin/python
+# http://www.emu-land.net/consoles/genesis/roms?act=getfile&id=1
 # id 1034 is last, Zoop game
 
 
@@ -21,6 +21,7 @@ dir_name = str(rom_id)
 if not os.path.exists(dir_name):
     os.makedirs(dir_name)
 
-#extract 7zip
-cmd = ['7z', 'e', out_7zip, '-o' + dir_name + 'y']
+#extract 7zip , only [!] ROMs
+cmd = ['7z', 'e', out_7zip, '-o' + dir_name, '*[!].gen', 'r']
+#print ("CMD= " + str(cmd))
 subprocess.call(cmd)
