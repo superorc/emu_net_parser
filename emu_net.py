@@ -22,6 +22,8 @@ if not os.path.exists(dir_name):
     os.makedirs(dir_name)
 
 #extract 7zip , only [!] ROMs
-cmd = ['7z', 'e', out_7zip, '-o' + dir_name, '*[!].gen', 'r']
+cmd = ['7z', 'e', '-y', out_7zip, '-o' + dir_name, '*[!].gen', 'r']
 #print ("CMD= " + str(cmd))
 subprocess.call(cmd)
+
+os.remove(out_7zip)
