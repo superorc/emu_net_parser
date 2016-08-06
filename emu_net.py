@@ -3,13 +3,13 @@
 # id 1034 is last, Zoop game
 
 
-import requests, subprocess, os, time
+import requests, subprocess, os, time, random
 
 
 
 def get_7zip(rom_id):
 
-    time.sleep(1)
+    time.sleep(0.5)
 
     url = "http://www.emu-land.net/consoles/genesis/roms?act=getfile&id=%s" % rom_id
     r = requests.get(url)
@@ -25,7 +25,6 @@ def get_7zip(rom_id):
 
 
 
-
 def get_rom(rom_id, out_7zip):
     #mkdir
     dir_name = str(rom_id)
@@ -37,17 +36,31 @@ def get_rom(rom_id, out_7zip):
     #print ("CMD= " + str(cmd))
     subprocess.call(cmd)
 
-    #os.remove(out_7zip)
+    os.remove(out_7zip)
 
 
 
-for roms in range(1, 1034):
-#roms = 666
+def get_random_rom_id():
+    id_list=[]
+    for i in range(1, 1035):
+        id_list.append(i)
+    id = random.choice(id_list)
+    id_list.remove(id)
+    return(str(id), len(id_list))
+
+
+
+
+#
+#Main execution
+#
+
+for roms in range(1, 3):
+
     out_7zip = get_7zip(roms)
-    print(out_7zip[0], out_7zip[1])
+    #print(out_7zip[0], out_7zip[1])
     get_rom(out_7zip[0], out_7zip[1])
 
+#print type(get_random_rom_id())
 
-    #print out_7zip.rom_id
-    #print out_7zip
-    #get_rom(roms)
+print(get_random_rom_id())
