@@ -46,8 +46,7 @@ def get_random_rom_id():
         id_list.append(i)
     id = random.choice(id_list)
     id_list.remove(id)
-    return(str(id), len(id_list))
-
+    return(str(id))#, len(id_list))
 
 
 
@@ -55,8 +54,8 @@ def get_random_rom_id():
 #Main execution
 #
 
-for roms in range(1, 3):
-
+for roms in range(1, 1036):
+    roms = get_random_rom_id()
     out_7zip = get_7zip(roms)
     #print(out_7zip[0], out_7zip[1])
     get_rom(out_7zip[0], out_7zip[1])
