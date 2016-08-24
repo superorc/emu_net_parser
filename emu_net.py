@@ -9,10 +9,11 @@ import requests, subprocess, os, time, random
 
 def get_7zip(rom_id):
 
-    time.sleep(0.5)
-
     url = "http://www.emu-land.net/consoles/genesis/roms?act=getfile&id=%s" % rom_id
     r = requests.get(url)
+
+    t = random.randint(3, 5)
+    time.sleep(t)
 
     out_7zip = "%s.7zip" % rom_id
     out = open(out_7zip, 'w')
@@ -33,7 +34,6 @@ def get_rom(rom_id, out_7zip):
 
     #extract 7zip , only [!] ROMs
     cmd = ['7z', 'e', '-y', out_7zip, '-o' + dir_name, '*[!].gen', 'r']
-    #print ("CMD= " + str(cmd))
     subprocess.call(cmd)
 
     os.remove(out_7zip)
