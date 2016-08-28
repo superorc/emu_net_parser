@@ -4,6 +4,7 @@
 
 
 import requests, subprocess, os, time, random
+from multiprocessing import Pool
 
 
 
@@ -29,7 +30,7 @@ def get_7zip(rom_id):
 def get_rom(rom_id, out_7zip):
     #mkdir
     dir_name = str(rom_id)
-    path = 'roms/%s' % dir_name 
+    path = 'roms/%s' % dir_name
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -54,13 +55,10 @@ def get_random_rom_id():
 #
 #Main execution
 #
-
-for roms in range(1, 1036):
-    roms = get_random_rom_id()
-    out_7zip = get_7zip(roms)
-    #print(out_7zip[0], out_7zip[1])
-    get_rom(out_7zip[0], out_7zip[1])
-
-#print type(get_random_rom_id())
-
-print(get_random_rom_id())
+if __name__ == '__main__':
+    p = Pool(10)
+    for roms in range(1, 1036):
+        roms = get_random_rom_id()
+        out_7zip = get_7zip(roms)
+        get_rom(out_7zip[0], out_7zip[1])
+        print('Rom saved : %s') % roms
