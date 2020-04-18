@@ -17,10 +17,12 @@ def get_7zip(rom_id):
     time.sleep(t)
 
     out_7zip = "%s.7zip" % rom_id
-    out = open(out_7zip, 'w')
+    out = open(out_7zip, 'w+b')
 
+    #print(r.content)
+    binary_format = bytearray(r.content)
     #save archive
-    out.write (r.content)
+    out.write (binary_format)
     out.close()
 
     return(rom_id, out_7zip)
@@ -36,9 +38,14 @@ def get_rom(rom_id, out_7zip):
 
     #extract 7zip , only [!] ROMs
     cmd = ['7z', 'e', '-y', out_7zip, '-o' + path, '*[!].gen', 'r']
-    subprocess.call(cmd)
+    
+    sub_process = subprocess.call(cmd)
+    #rc = sub_process.returncode
 
-    os.remove(out_7zip)
+    #if rc != 0:
+    #    print("Failed to save rom file")
+
+    #os.remove(out_7zip)
 
 
 
@@ -56,9 +63,11 @@ def get_random_rom_id():
 #Main execution
 #
 if __name__ == '__main__':
-    p = Pool(10)
-    for roms in range(1, 1036):
-        roms = get_random_rom_id()
-        out_7zip = get_7zip(roms)
+    p = Pool(2)
+    for id in range(1, 1036):
+        id = get_random_rom_id()
+        out_7zip = get_7zip(id)
+
+        
         get_rom(out_7zip[0], out_7zip[1])
-        print('Rom saved : %s') % roms
+        #print('Rom saved : %s') % roms
