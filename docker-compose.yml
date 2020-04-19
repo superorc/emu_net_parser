@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  
+  downloader:
+    build: 
+      context: ./
+      dockerfile: ./Dockerfile_downloader
+    links:
+      - redis01
+
+  redis01:
+    image: redis:latest
+    # port=6379

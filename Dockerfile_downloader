@@ -1,0 +1,8 @@
+FROM python:slim
+
+WORKDIR /app
+
+COPY ./requirements.txt /app/
+COPY ./*.py /app/
+
+RUN pip install -r /app/requirements.txt
