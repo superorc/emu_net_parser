@@ -1,2 +1,3 @@
 aioredis
 asyncio
+python-dotenv

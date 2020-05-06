@@ -6,7 +6,7 @@ services:
     build: 
       context: ./
       dockerfile: ./Dockerfile_downloader
-    command: 
+    command:
       ["python", "-m", "downloader.py"]
     links:
       - redis
