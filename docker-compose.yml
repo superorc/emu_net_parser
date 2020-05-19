@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.0'
 
 services:
 
@@ -6,11 +6,13 @@ services:
     build: 
       context: ./
       dockerfile: ./Dockerfile_downloader
-    command:
+    command: 
       ["python", "-m", "downloader.py"]
-    links:
-      - redis
+    #links:
+    #  - redis01
+    depends_on: 
+      - redis01
 
-  redis:
+  redis01:
     image: redis:latest
     # port=6379

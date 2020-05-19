@@ -1,6 +1,7 @@
-import os
-from dotenv import load_dotenv
+#import os
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
-#print(os.getenv("REDIS_HOST"))
+print("loaded!")
+#print(os.getenv("REDIS_URL"))
