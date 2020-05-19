@@ -8,11 +8,18 @@ services:
       dockerfile: ./Dockerfile_downloader
     command: 
       ["python", "-m", "downloader.py"]
-    #links:
-    #  - redis01
-    depends_on: 
+    links:
       - redis01
+    #depends_on: 
+    #  - redis01
 
   redis01:
     image: redis:latest
-    # port=6379
+#    ports:
+#      - "6397:6397"
+  
+  redis-client:
+    image: centos:7
+    command: "ping redis01"
+#    links: 
+#      - redis01

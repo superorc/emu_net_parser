@@ -1,6 +1,7 @@
 import asyncio
 import aioredis
 import settings
+import logging
 import os
 
 class RedisClient:
@@ -14,11 +15,12 @@ class RedisClient:
     async def main():
         """ Create redis connection """
         try:
-            #print(os.getenv("REDIS_HOST"))
-            print(os.getenv("REDIS_URL"))
+            #logging.info("Trying connect to %s") % os.getenv("REDIS_URL")
+            #print(os.getenv("REDIS_URL"))
             redis = await aioredis.create_redis_pool("redis://%s") % os.getenv("REDIS_URL")
         except:
-            print("Connection to redis failed")
+            logging.error("Connection to redis failed")
+            #print("Connection to redis failed")
             raise
         
         await redis.set('my-key', 'value')
