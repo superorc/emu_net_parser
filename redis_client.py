@@ -16,14 +16,14 @@ class RedisClient:
         """ Create redis connection """
         try:
             logging.info('Trying connect to %s', os.getenv("REDIS_URL"))
-            redis = await aioredis.create_redis_pool("redis://%s") % os.getenv("REDIS_URL")
+            redis = await aioredis.create_redis_pool('redis://redis01') #% os.getenv("REDIS_URL")
         except:
             logging.error("Connection to redis at %s failed", os.getenv("REDIS_URL"))
             raise
         
-        await redis.set('my-key', 'value')
+        await redis.set('game_name', 'http://download_url')
 
-        value = await redis.get('my-key', encoding='utf-8')
+        value = await redis.get('game_name', encoding='utf-8')
         print(value)
 
         redis.close()
