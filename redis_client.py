@@ -15,8 +15,10 @@ class RedisClient:
     async def main():
         """ Create redis connection """
         try:
-            logging.info('Trying connect to %s', os.getenv("REDIS_URL"))
-            redis = await aioredis.create_redis_pool('redis://redis01') #% os.getenv("REDIS_URL")
+            REDIS_URL = "redis://" + os.getenv("REDIS_URL")
+            logging.info('Trying connect to %s', REDIS_URL)
+            
+            redis = await aioredis.create_redis_pool(REDIS_URL)
         except:
             logging.error("Connection to redis at %s failed", os.getenv("REDIS_URL"))
             raise
