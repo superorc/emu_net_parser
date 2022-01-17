@@ -1,19 +1,22 @@
-import asyncio
+#import asyncio
 import aioredis
-import settings
+#import settings
 import logging
 import os
 
 class RedisClient:
 
-    async def pub_to_redis(self, file_name):
-        pass
+    '''
+    def __init__(self, rom_id, url, archive):
+        self.rom_id = 0
+        self.url = null
+        self.archive = null
+    '''
 
-    async def get_from_redis(self, file_name):
-        pass
+    async def main(self, rom_id, url, archive):
 
-    async def main():
         """ Create redis connection """
+
         try:
             REDIS_URL = "redis://" + os.getenv("REDIS_URL")
             logging.info('Trying connect to %s', REDIS_URL)
@@ -23,13 +26,15 @@ class RedisClient:
             logging.error("Connection to redis at %s failed", os.getenv("REDIS_URL"))
             raise
         
-        await redis.set('game_name', 'http://download_url')
+        await redis.set(rom_id, url)
 
-        value = await redis.get('game_name', encoding='utf-8')
+        value = await redis.get(rom_id, encoding='utf-8')
         print(value)
 
         redis.close()
         await redis.wait_closed()
 
 
-    asyncio.run(main())
+
+    #asyncio.run(main(rom_id, url, archive))
+    #asyncio.run(main())

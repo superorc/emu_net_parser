@@ -6,6 +6,8 @@
 import requests, subprocess, os, time, random
 from multiprocessing import Pool
 
+from redis_client import RedisClient
+
 
 
 def get_7zip(rom_id):
@@ -21,8 +23,11 @@ def get_7zip(rom_id):
 
     #print(r.content)
     binary_format = bytearray(r.content)
+
     #save archive
-    out.write (binary_format)
+    out.write(binary_format)
+
+    RedisClient("id") #(rom_id, url, binary_format)
     out.close()
 
     return(rom_id, out_7zip)
@@ -38,7 +43,7 @@ def get_rom(rom_id, out_7zip):
 
     #extract 7zip , only [!] ROMs
     cmd = ['7z', 'e', '-y', out_7zip, '-o' + path, '*[!].gen', 'r']
-    
+
     sub_process = subprocess.call(cmd)
     #rc = sub_process.returncode
 
@@ -50,12 +55,12 @@ def get_rom(rom_id, out_7zip):
 
 
 def get_random_rom_id():
-    id_list=[]
+    id_list = []
     for i in range(1, 1035):
         id_list.append(i)
     id = random.choice(id_list)
     id_list.remove(id)
-    return(str(id))#, len(id_list))
+    return str(id)#, len(id_list))
 
 
 
@@ -68,6 +73,5 @@ if __name__ == '__main__':
         id = get_random_rom_id()
         out_7zip = get_7zip(id)
 
-        
         get_rom(out_7zip[0], out_7zip[1])
         #print('Rom saved : %s') % roms
