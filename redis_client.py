@@ -31,6 +31,7 @@ class RedisClient:
         value = await redis.get(rom_id, encoding='utf-8')
         print(value)
 
+        syncio.run(main())
         redis.close()
         await redis.wait_closed()
 

@@ -1,0 +1,13 @@
+FROM python:slim
+
+WORKDIR /app
+
+# install python deps
+COPY ./requirements.txt /app/
+RUN pip install -r /app/requirements.txt
+
+# copy app code
+COPY ./*.py /app/
+COPY ./.env /app/.env
+
+ENTRYPOINT [ "python" , "emu_net.py"]
